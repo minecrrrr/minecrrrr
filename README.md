@@ -1,5 +1,5 @@
 <h1 align="center">Hi, I'm minecrrrr</h1>
-- I'm I'm contributor of LiquidBounce NextGen (https://github.com/CCBlueX/LiquidBounce/tree/nextgen)
+- I'm contributor of LiquidBounce NextGen (https://github.com/CCBlueX/LiquidBounce/tree/nextgen)
 
 - My gmail -> **minecrrrrGithub@gmail.com**
 
