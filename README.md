@@ -1,4 +1,4 @@
-<h3 align="center">Kotlin & Minecraft Open-Source Enthusiast»</h3>
+<h3 align="center">Kotlin & Minecraft Open-Source Enthusiast</h3>
 <p align="left">
 </p>
 
