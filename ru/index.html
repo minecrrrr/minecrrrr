@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Адаптация под мобильные устройства -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- ║  ЗАГОЛОВОК ВКЛАДКИ — замените на своё имя    ║ -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <title>minecrrrr.space — Personal Space</title>
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  CSS-ПЕРЕМЕННЫЕ — цвета сайта                               ║ */
+      /* ║  Меняйте значения ниже, чтобы сменить палитру               ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      :root {
+        --bg: #0a0a0f; /* Фон страницы */
+        --bg-elevated: #12121a; /* Фон карточек при наведении */
+        --bg-card: #1a1a24; /* Фон карточек */
+        --text: #e8e8ec; /* Основной текст */
+        --text-muted: #8a8a9a; /* Вторичный текст */
+        --text-dim: #5a5a6a; /* Тусклый текст */
+        --accent: #c4a47c; /* Акцентный цвет (золотой) */
+        --accent-glow: rgba(196, 164, 124, 0.15); /* Свечение */
+        --border: rgba(255, 255, 255, 0.06); /* Границы */
+        --border-hover: rgba(196, 164, 124, 0.3); /* Граница при наведении */
+        --radius: 16px; /* Скругление большое */
+        --radius-sm: 10px; /* Скругление малое */
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  БАЗОВЫЕ СТИЛИ — сброс отступов, шрифты, скроллбар          ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  NOISE OVERLAY — лёгкая зернистость поверх всего            ║ */
+      /* ║  Добавляет текстуру, можно удалить, убрав этот блок       ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.03;
+        z-index: 9999;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      }
+
+      /* Стилизация скроллбара */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--text-dim);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  АНИМАЦИИ — описаны здесь, применяются в HTML через классы  ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* Классы для анимации появления */
+      .fade-up {
+        opacity: 0;
+        animation: fadeUp 0.8s ease forwards;
+      }
+      .fade-up.delay-1 {
+        animation-delay: 0.1s;
+      }
+      .fade-up.delay-2 {
+        animation-delay: 0.2s;
+      }
+      .fade-up.delay-3 {
+        animation-delay: 0.3s;
+      }
+      .fade-up.delay-4 {
+        animation-delay: 0.4s;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  КОНТЕЙНЕР — центрирует контент, ограничивает ширину        ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  НАВИГАЦИЯ — фиксированная сверху                           ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 20px 0;
+        transition: all 0.3s ease;
+      }
+      /* При скролле добавляется класс scrolled через JS */
+      nav.scrolled {
+        background: rgba(10, 10, 15, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 0;
+      }
+      nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      /* Подчёркивание при наведении */
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  HERO — первая секция, на весь экран                        ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      /* Размытое свечение позади аватара */
+      .hero-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: pulse 6s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .hero-content {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      /* Аватар — круг с буквой */
+      .hero-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 32px;
+        background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 2.5rem;
+        color: var(--accent);
+        position: relative;
+        overflow: hidden;
+      }
+      /* Градиентная рамка вокруг аватара */
+      .hero-avatar::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 50%;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--accent), transparent 60%);
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.5;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      /* Градиентный текст */
+      .hero h1 .accent {
+        background: linear-gradient(135deg, var(--accent), #e8d5b5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-subtitle {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        letter-spacing: 1px;
+        min-height: 1.5em;
+      }
+      /* Мигающий курсор печатной машинки */
+      .hero-subtitle .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.2em;
+        background: var(--accent);
+        margin-left: 4px;
+        animation: blink 1s step-end infinite;
+        vertical-align: text-bottom;
+      }
+      .hero-desc {
+        max-width: 520px;
+        margin: 0 auto 40px;
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  КНОПКИ — два стиля: primary (залитая) и secondary (обводка) ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--bg);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 40px rgba(196, 164, 124, 0.3);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .btn-secondary:hover {
+        border-color: var(--border-hover);
+        background: var(--bg-card);
+        transform: translateY(-2px);
+      }
+      /* Подсказка прокрутки внизу hero */
+      .scroll-hint {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--text-dim);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  СЕКЦИИ — общие стили для всех блоков                       ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      section {
+        padding: 100px 0;
+        position: relative;
+      }
+      .section-header {
+        margin-bottom: 60px;
+      }
+      .section-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--accent);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1.2;
+      }
+      .section-title span {
+        color: var(--text-muted);
+        font-weight: 400;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  ОБО МНЕ — две колонки: текст + статистика                  ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+      }
+      .about-text {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        line-height: 1.9;
+      }
+      .about-text p {
+        margin-bottom: 20px;
+      }
+      .about-text strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .about-text a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+      .about-text a:hover {
+        border-bottom-color: var(--accent);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 28px;
+        transition: all 0.3s ease;
+      }
+      .stat-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+      }
+      .stat-number {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  НАВЫКИ — сетка карточек (автоподбор колонок)               ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .skill-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 28px;
+        transition: all 0.3s ease;
+      }
+      .skill-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+      }
+      .skill-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .skill-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+      .skill-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      .skill-level {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .skill-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .skill-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  ПРОЕКТЫ — карточки с заголовком, описанием и тегами        ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+      .project-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: all 0.4s ease;
+        position: relative;
+      }
+      /* Линия сверху при наведении */
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .project-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      .project-card:hover::before {
+        opacity: 1;
+      }
+      .project-body {
+        padding: 28px;
+      }
+      .project-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .project-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+      .project-links {
+        display: flex;
+        gap: 12px;
+      }
+      .project-links a {
+        color: var(--text-dim);
+        transition: color 0.3s ease;
+      }
+      .project-links a:hover {
+        color: var(--accent);
+      }
+      .project-desc {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .project-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+      .project-footer {
+        padding: 16px 28px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  КОНТАКТЫ — центрированный блок с кнопками                  ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .contact-section {
+        text-align: center;
+        padding: 120px 0;
+      }
+      .contact-section .section-title {
+        margin-bottom: 20px;
+      }
+      .contact-section p {
+        color: var(--text-muted);
+        max-width: 500px;
+        margin: 0 auto 40px;
+        font-size: 1.05rem;
+      }
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .contact-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .contact-link:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+        color: var(--accent);
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  ФУТЕР — нижняя строка                                     ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      footer {
+        padding: 40px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      footer p {
+        color: var(--text-dim);
+        font-size: 0.8rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+      footer a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  АДАПТИВНОСТЬ — стили для телефонов (ширина < 768px)       ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btn {
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
+        }
+        section {
+          padding: 60px 0;
+        }
+      }
+
+      /* ════════════════════════════════════════════════════════════════ */
+      /* ║  REVEAL — анимация появления при скролле                    ║ */
+      /* ║  JS добавляет класс .visible, когда элемент в зоне видимости ║ */
+      /* ════════════════════════════════════════════════════════════════ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  НАВИГАЦИЯ                                                   ║ -->
+    <!-- ║  Логотип слева, ссылки справа. При скролле становится       ║ -->
+    <!-- ║  полупрозрачным с blur-эффектом.                              ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <nav id="nav">
+      <div class="container">
+        <!-- Логотип — замените текст на своё имя/ник -->
+        <a href="#" class="logo">minecrrrr<span>.space</span></a>
+        <ul class="nav-links">
+          <!-- Якорные ссылки — при клике плавно скроллят к секции -->
+          <li><a href="#about">Обо мне</a></li>
+          <li><a href="#skills">Навыки</a></li>
+          <li><a href="#projects">Проекты</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  HERO — первая секция, на весь экран                         ║ -->
+    <!-- ║  Здесь: аватар, имя, печатающийся текст, описание, кнопки   ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <!-- Размытое свечение позади -->
+      <div class="hero-bg"></div>
+
+      <div class="hero-content">
+        <!-- Аватар — круг с буквой. Можно заменить на <img src="..."> -->
+        <div class="hero-avatar">
+          <img
+            src="https://github.com/minecrrrr.png"
+            alt="minecrrrr avatar"
+            style="width: 110px; height: auto; border-radius: 50%"
+          />
+        </div>
+
+        <!-- Заголовок -->
+        <h1 class="fade-up delay-1">
+          Привет, я <span class="accent">minecrrrr</span>
+        </h1>
+
+        <!-- Печатающийся текст — JS меняет содержимое -->
+        <p class="hero-subtitle fade-up delay-2">
+          <span id="typewriter"></span><span class="cursor"></span>
+        </p>
+
+        <!-- Короткое описание -->
+        <p class="hero-desc fade-up delay-3">
+          Занимаюсь разработкой визуальных модулей для LiquidBounce NextGen.
+        </p>
+
+        <!-- Кнопки -->
+        <div class="hero-buttons fade-up delay-4">
+          <!-- Кнопка на GitHub -->
+          <a
+            href="https://github.com/minecrrrr"
+            target="_blank"
+            class="btn btn-primary"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+              />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+            GitHub
+          </a>
+          <!-- Вторая кнопка — замените ссылку и текст -->
+          <a
+            href="https://github.com/CCBlueX/LiquidBounce"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            LiquidBounce NextGen
+          </a>
+        </div>
+      </div>
+
+      <!-- Подсказка прокрутить вниз -->
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  ОБО МНЕ — две колонки: текст слева, статистика справа       ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <section id="about">
+      <div class="container">
+        <!-- Заголовок секции -->
+        <div class="section-header reveal">
+          <p class="section-label"></p>
+          <h2 class="section-title">Обо мне <span>— кто я</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <!-- Левая колонка — текст -->
+          <div class="about-text reveal">
+            <p>
+              Я — один из активных разработчиков LiquidBounce NextGen. Работаю
+              на полном энтузиазме и желании развивать этот проект.
+            </p>
+            <p>
+              Знаком с LiquidBounce NextGen больше года. Пишу код для него уже 8
+              месяцев.
+            </p>
+            <p>
+              В свободное от кода время люблю проводить время в кругу друзей.
+            </p>
+          </div>
+
+          <!-- Правая колонка — карточки-статистика -->
+          <div class="stats reveal">
+            <!-- Карточка 1 -->
+            <div class="stat-card">
+              <div class="stat-number">
+                <div class="skill-icon">
+                  <img
+                    src="https://unpkg.com/lucide-static@latest/icons/code-xml.svg"
+                    alt="Code lines"
+                    style="
+                      filter: brightness(0) invert(1);
+                      width: 30px;
+                      height: auto;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="stat-label">
+                Добавлено <strong>3000+</strong> строк чистого кода.
+              </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="stat-card">
+              <div class="stat-number">
+                <div class="skill-icon">
+                  <img
+                    src="https://unpkg.com/lucide-static@latest/icons/git-merge.svg"
+                    alt="Pull requests"
+                    style="
+                      filter: brightness(0) invert(1);
+                      width: 30px;
+                      height: auto;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="stat-label">
+                Успешно принято <strong>11</strong> PullRequest'ов.
+              </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="stat-card">
+              <div class="stat-number">
+                <div class="skill-icon">
+                  <img
+                    src="https://unpkg.com/lucide-static@latest/icons/trending-up.svg"
+                    alt="Top contributor"
+                    style="
+                      filter: brightness(0) invert(1);
+                      width: 30px;
+                      height: auto;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="stat-label">
+                <strong>Вхожу в ТОП-10 контрибьюторов</strong> за последние 12
+                месяцев.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  НАВЫКИ — сетка карточек. Каждая карточка = один навык       ║ -->
+    <!-- ║  Чтобы добавить карточку — скопируйте блок .skill-card      ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label"></p>
+          <h2 class="section-title">Навыки <span>— стек</span></h2>
+        </div>
+
+        <div class="skills-grid">
+          <!-- ═════ КАРТОЧКА НАВЫКА 1 ═════ -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <img
+                  src="https://cdn.svglogos.dev/logos/kotlin-icon.svg"
+                  alt="kotlin"
+                  style="width: 25px; height: auto"
+                />
+              </div>
+              <div>
+                <h3 class="skill-name">Kotlin</h3>
+                <span class="skill-level">Middle+</span>
+              </div>
+            </div>
+            <p class="skill-desc">
+              Уверенное владение Kotlin в своей нише. Разработка клиентских
+              модулей, 3D-математика и работа с Render API LiquidBounce.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">Kotlin</span>
+              <span class="skill-tag">LiquidBounce</span>
+              <span class="skill-tag">Render</span>
+            </div>
+          </div>
+
+          <!-- ═════ КАРТОЧКА НАВЫКА 2 ═════ -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <img
+                  src="https://cdn.svglogos.dev/logos/linux-tux.svg"
+                  alt="linux-tux"
+                  style="width: 25px; height: auto"
+                />
+              </div>
+              <div>
+                <h3 class="skill-name">Linux-distros</h3>
+                <span class="skill-level">Junior+</span>
+              </div>
+            </div>
+            <p class="skill-desc">
+              Уверенно работаю с различными Linux-дистрибутивами.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">Arch-based</span>
+              <span class="skill-tag">Gentoo Linux</span>
+            </div>
+          </div>
+
+          <!-- ═════ КАРТОЧКА НАВЫКА 3 ═════ -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <img
+                  src="https://unpkg.com/lucide-static@latest/icons/message-square-code.svg"
+                  alt="Mentorship"
+                  style="
+                    filter: brightness(0) invert(1);
+                    width: 25px;
+                    height: auto;
+                  "
+                />
+              </div>
+              <div>
+                <h3 class="skill-name">Mentorship</h3>
+                <span class="skill-level">Junior</span>
+              </div>
+            </div>
+            <p class="skill-desc">
+              Отлавливаю нейросетевой спагетти-код, исправляю код-стайл и
+              предлагаю точечные Suggested Changes.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">Mentorship</span>
+              <span class="skill-tag">Review</span>
+              <span class="skill-tag">Code-style</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  ПРОЕКТЫ — карточки проектов                                 ║ -->
+    <!-- ║  Чтобы добавить проект — скопируйте блок .project-card       ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label"></p>
+          <h2 class="section-title">
+            Проекты и репозиториии <span>— что делаю и где состою</span>
+          </h2>
+        </div>
+
+        <div class="projects-grid">
+          <!-- ═════ ПРОЕКТ 1 ═════ -->
+          <div class="project-card reveal">
+            <div class="project-body">
+              <div class="project-header">
+                <h3 class="project-title">LiquidBounce NextGen</h3>
+                <div class="project-links">
+                  <span
+                    ><img
+                      src="https://img.shields.io/github/stars/CCBlueX/LiquidBounce?style=flat-square&color=c4a47c&labelColor=1a1a24&logo=github"
+                      alt="stars"
+                  /></span>
+                  <!-- Ссылка на GitHub -->
+                  <a
+                    href="https://github.com/CCBlueX/LiquidBounce"
+                    target="_blank"
+                    aria-label="GitHub"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      />
+                      <path d="M9 18c-4.51 2-5-2-7-2" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <p class="project-desc">
+                Популярный и бесплатный чит-клиент для игры Minecraft на самых
+                новых версиях.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag"
+                  ><img
+                    src="https://cdn.svglogos.dev/logos/kotlin-icon.svg"
+                    alt="kotlin"
+                    style="width: 10px; height: auto"
+                  />
+                  Kotlin</span
+                >
+                <span class="project-tag"
+                  ><img
+                    src="https://cdn.svglogos.dev/logos/java.svg"
+                    alt="java"
+                    style="width: 10px; height: auto"
+                  />
+                  Java</span
+                >
+                <span class="project-tag"
+                  ><img
+                    src="https://cdn.svglogos.dev/logos/svelte-icon.svg"
+                    alt="svelte"
+                    style="width: 10px; height: auto"
+                  />
+                  Svelte</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  ФУТЕР — нижняя строка с копирайтом                         ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <footer>
+      <div class="container">
+        <p>
+          © 2026
+          <a href="https://github.com/minecrrrr" target="_blank">minecrrrr</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- ║  JAVASCRIPT — логика сайта                                   ║ -->
+    <!-- ║  Всё в одном файле, ничего подключать не нужно               ║ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <script>
+      // ═══════════════════════════════════════════════════════════════
+      // 1. ПЕЧАТАЮЩАЯ МАШИНКА (Typewriter Effect)
+      // ═══════════════════════════════════════════════════════════════
+      // Замените фразы в массиве ниже на свои
+      const phrases = [
+        "Kotlin-разработчик",
+        "Активный контрибьютор",
+        "Визуальный разработчик",
+      ];
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typewriter = document.getElementById("typewriter");
+
+      function type() {
+        const current = phrases[phraseIndex];
+        if (isDeleting) {
+          typewriter.textContent = current.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typewriter.textContent = current.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 120;
+
+        if (!isDeleting && charIndex === current.length) {
+          typeSpeed = 2000; // Пауза перед стиранием
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          typeSpeed = 500; // Пауза перед новой фразой
+        }
+
+        setTimeout(type, typeSpeed);
+      }
+      type();
+
+      // ═══════════════════════════════════════════════════════════════
+      // 2. ЭФФЕКТ НАВИГАЦИИ ПРИ СКРОЛЛЕ
+      // ═══════════════════════════════════════════════════════════════
+      // Когда страница прокручена больше чем на 50px — добавляется
+      // класс .scrolled к nav, который делает фон полупрозрачным
+      // с blur-эффектом (backdrop-filter)
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+
+      // ═══════════════════════════════════════════════════════════════
+      // 3. АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (Intersection Observer)
+      // ═══════════════════════════════════════════════════════════════
+      // Этот код следит за элементами с классом .reveal.
+      // Когда элемент попадает в область видимости — добавляется
+      // класс .visible, и элемент плавно появляется.
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      ); // Срабатывает, когда 10% элемента видно
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // ═══════════════════════════════════════════════════════════════
+      // 4. ПЛАВНАЯ ПРОКРУТКА ПО ЯКОРНЫМ ССЫЛКАМ
+      // ═══════════════════════════════════════════════════════════════
+      // При клике на ссылку вида href="#about" страница плавно
+      // скроллится к секции с id="about"
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
