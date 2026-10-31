@@ -1,267 +1,731 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>minecrrrr.space — Redirect</title>
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puzov Client — приватный чит для Minecraft. 100 ₽ навсегда</title>
+  <meta name="description" content="Puzov Client — шуточный приватный чит для Minecraft: 148 модулей, обход античитов и сабка за 100 ₽ навсегда. Сайт-рофл, ничего не продаём.">
+  <meta name="theme-color" content="#07070a">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://puzov-client.ru/">
+  <meta property="og:site_name" content="Puzov Client">
+  <meta property="og:title" content="Puzov Client — играй честно. Просто с читами.">
+  <meta property="og:description" content="148 модулей, обход античитов и сабка за 100 ₽ навсегда. Сайт-шутка, но выглядит дорого.">
+  <meta property="og:image" content="https://puzov-client.ru/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Puzov Client — играй честно, просто с читами. 100 ₽ навсегда.">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Puzov Client — приватный чит для Minecraft">
+  <meta name="twitter:description" content="148 модулей, обход античитов и сабка за 100 ₽ навсегда. Сайт-шутка.">
+  <meta name="twitter:image" content="https://puzov-client.ru/assets/og.png">
+  <link rel="canonical" href="https://puzov-client.ru/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.remove('no-js');</script>
+</head>
+<body id="top">
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <!-- фоновые слои -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__grid"></div>
+    <div class="bg__blob bg__blob--lime"></div>
+    <div class="bg__blob bg__blob--violet"></div>
+    <div class="bg__noise"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a class="logo" href="#top" aria-label="Puzov Client — в начало">
+        <svg class="logo__mark" viewBox="0 0 40 44" aria-hidden="true">
+          <polygon points="20,2 37,11 20,20 3,11" fill="#c9ff5a"/>
+          <polygon points="3,11 20,20 20,42 3,33" fill="#78c93c"/>
+          <polygon points="20,20 37,11 37,33 20,42" fill="#9be94a"/>
+        </svg>
+        <span class="logo__text">PUZOV<em>CLIENT</em></span>
+      </a>
 
-    <style>
-      :root {
-        --bg: #0a0a0f;
-        --bg-card: #1a1a24;
-        --text: #e8e8ec;
-        --text-muted: #8a8a9a;
-        --text-dim: #5a5a6a;
-        --accent: #c4a47c;
-        --accent-glow: rgba(196, 164, 124, 0.15);
-        --border: rgba(255, 255, 255, 0.06);
-        --border-hover: rgba(196, 164, 124, 0.3);
-        --radius: 16px;
-        --radius-sm: 10px;
-      }
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#features">Возможности</a>
+        <a href="#client">Клиент</a>
+        <a href="#pricing">Тариф</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family:
-          "Inter",
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        -webkit-font-smoothing: antialiased;
-        overflow: hidden;
-        position: relative;
-      }
-
-      /* Noise overlay */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.03;
-        z-index: 1;
-        pointer-events: none;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      }
-
-      /* Glow behind card */
-      .glow {
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(
-          circle,
-          var(--accent-glow) 0%,
-          transparent 70%
-        );
-        border-radius: 50%;
-        animation: pulse 4s ease-in-out infinite;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.6;
-          transform: scale(1.1);
-        }
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .card {
-        position: relative;
-        z-index: 2;
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 48px 40px;
-        text-align: center;
-        max-width: 420px;
-        width: 90%;
-        animation: fadeUp 0.6s ease forwards;
-      }
-
-      .logo {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: var(--text);
-        margin-bottom: 32px;
-        letter-spacing: -0.5px;
-      }
-      .logo span {
-        color: var(--accent);
-      }
-
-      .spinner {
-        width: 32px;
-        height: 32px;
-        border: 2px solid var(--border);
-        border-top-color: var(--accent);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        margin: 0 auto 24px;
-      }
-
-      .title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        letter-spacing: -0.5px;
-      }
-
-      .subtitle {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-bottom: 32px;
-      }
-
-      .divider {
-        height: 1px;
-        background: var(--border);
-        margin-bottom: 24px;
-      }
-
-      .lang-label {
-        font-size: 0.75rem;
-        color: var(--text-dim);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 16px;
-      }
-
-      .lang-buttons {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-      }
-
-      .lang-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 24px;
-        border-radius: var(--radius-sm);
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        color: var(--text-muted);
-        background: transparent;
-        border: 1px solid var(--border);
-        cursor: pointer;
-        font-family: inherit;
-        transition: all 0.3s ease;
-      }
-      .lang-btn:hover {
-        border-color: var(--border-hover);
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.02);
-        transform: translateY(-2px);
-      }
-      .lang-btn.primary {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-      .lang-btn.primary:hover {
-        background: rgba(196, 164, 124, 0.08);
-      }
-
-      .flag {
-        font-size: 1rem;
-      }
-    </style>
-
-    <script>
-      (function () {
-        var userLang = navigator.language || navigator.userLanguage;
-        if (userLang.toLowerCase().startsWith("ru")) {
-          window.location.replace("./ru/index.html");
-        } else {
-          window.location.replace("./en/index.html");
-        }
-      })();
-    </script>
-    <noscript>
-      <meta http-equiv="refresh" content="0;url=./en/index.html" />
-    </noscript>
-  </head>
-  <body>
-    <div class="glow"></div>
-
-    <div class="card">
-      <div class="logo">minecrrrr<span>.space</span></div>
-
-      <div class="spinner"></div>
-
-      <h1 class="title">Redirecting...</h1>
-      <p class="subtitle">Detecting your language preference</p>
-
-      <div class="divider"></div>
-
-      <p class="lang-label">Or choose manually</p>
-
-      <div class="lang-buttons">
-        <a href="./en/index.html" class="lang-btn">
-          <span class="flag"
-            ><img
-              src="https://hatscripts.github.io/circle-flags/flags/us.svg"
-              width="25"
-          /></span>
-          English
-        </a>
-        <a href="./ru/index.html" class="lang-btn primary">
-          <span class="flag"
-            ><img
-              src="https://hatscripts.github.io/circle-flags/flags/ru.svg"
-              width="25"
-          /></span>
-          Русский
-        </a>
+      <div class="header__actions">
+        <span class="header__price"><b>100 ₽</b> навсегда</span>
+        <button class="btn btn--primary btn--sm" type="button" data-open-pay>
+          Купить
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </button>
+        <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span>
+        </button>
       </div>
     </div>
-  </body>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Мобильная навигация">
+        <a href="#features"><span>01</span>Возможности</a>
+        <a href="#client"><span>02</span>Клиент</a>
+        <a href="#pricing"><span>03</span>Тариф</a>
+        <a href="#reviews"><span>04</span>Отзывы</a>
+        <a href="#faq"><span>05</span>FAQ</a>
+      </nav>
+      <button class="btn btn--primary btn--full" type="button" data-open-pay>Забрать за 100 ₽</button>
+      <p class="mobile-menu__note">без подписки · без банов* · без возвратов</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <div class="badge reveal">
+            <span class="badge__dot"></span>
+            онлайн <b>1 204</b> человека · обновлено только что
+          </div>
+
+          <h1 class="hero__title reveal">
+            Играй честно.<br>
+            <span class="grad">Просто <br class="br-mobile">с читами.</span>
+          </h1>
+
+          <p class="hero__lead reveal">
+            Puzov Client — приватный чит для Minecraft с человеческим лицом
+            и без человеческой совести. 148 модулей, обход античитов
+            и сабка за 100 ₽. Один раз. Навсегда.
+          </p>
+
+          <div class="hero__actions reveal">
+            <button class="btn btn--primary" type="button" data-open-pay>
+              Забрать за 100 ₽
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+            <a class="btn btn--ghost" href="#client">
+              Посмотреть модули
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <p class="hero__micro reveal">
+            без подписки <i>·</i> без банов<sup>*</sup> <i>·</i> без возвратов
+          </p>
+
+          <div class="hero__platforms reveal">
+            <span>Forge</span><span>Fabric</span><span>1.8.9 — 1.21.5</span><span>Windows</span>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal" data-tilt>
+          <div class="scene">
+            <div class="scene__glow"></div>
+            <div class="scene__ring"></div>
+
+            <svg class="block" viewBox="0 0 320 340" role="img" aria-label="Изометрический блок травы">
+              <defs>
+                <linearGradient id="gTop" x1="70" y1="30" x2="250" y2="170" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#c4ff7c"/><stop offset=".5" stop-color="#8ade52"/><stop offset="1" stop-color="#5cbb32"/>
+                </linearGradient>
+                <linearGradient id="gLeft" x1="34" y1="100" x2="160" y2="220" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#75c845"/><stop offset="1" stop-color="#3e7d22"/>
+                </linearGradient>
+                <linearGradient id="gRight" x1="160" y1="100" x2="286" y2="240" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#86d94f"/><stop offset="1" stop-color="#4a9229"/>
+                </linearGradient>
+                <linearGradient id="dLeft" x1="34" y1="130" x2="160" y2="300" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8a6038"/><stop offset="1" stop-color="#4c321c"/>
+                </linearGradient>
+                <linearGradient id="dRight" x1="160" y1="196" x2="286" y2="300" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#9b6c3f"/><stop offset="1" stop-color="#5c3d22"/>
+                </linearGradient>
+                <linearGradient id="topShine" x1="160" y1="34" x2="160" y2="166" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="sideShade" x1="0" y1="0" x2="0" y2="1">
+                  <stop stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/>
+                </linearGradient>
+              </defs>
+
+              <!-- верхняя грань -->
+              <polygon points="160,34 286,100 160,166 34,100" fill="url(#gTop)"/>
+              <polygon points="160,34 286,100 160,166 34,100" fill="url(#topShine)"/>
+
+              <!-- боковые грани: трава -->
+              <polygon points="34,100 160,166 160,196 34,130" fill="url(#gLeft)"/>
+              <polygon points="160,166 286,100 286,130 160,196" fill="url(#gRight)"/>
+
+              <!-- боковые грани: земля -->
+              <polygon points="34,130 160,196 160,300 34,234" fill="url(#dLeft)"/>
+              <polygon points="160,196 286,130 286,234 160,300" fill="url(#dRight)"/>
+              <polygon points="34,130 160,196 160,300 34,234" fill="url(#sideShade)"/>
+              <polygon points="160,196 286,130 286,234 160,300" fill="url(#sideShade)" opacity=".6"/>
+
+              <!-- пиксельные вкрапления на траве -->
+              <g opacity=".5">
+                <rect x="72" y="72" width="10" height="10" fill="#d6ff9a"/>
+                <rect x="196" y="88" width="12" height="12" fill="#e2ffb0"/>
+                <rect x="118" y="118" width="9" height="9" fill="#4ea52b"/>
+                <rect x="226" y="52" width="9" height="9" fill="#a9ef6b"/>
+                <rect x="60" y="106" width="8" height="8" fill="#4ea52b"/>
+                <rect x="176" y="132" width="8" height="8" fill="#5cb734"/>
+              </g>
+
+              <!-- пиксельные вкрапления на земле -->
+              <g opacity=".35">
+                <rect x="66" y="176" width="12" height="12" fill="#a97a4a"/>
+                <rect x="108" y="222" width="10" height="10" fill="#3a2414"/>
+                <rect x="52" y="210" width="8" height="8" fill="#b98a58"/>
+                <rect x="196" y="214" width="12" height="12" fill="#b3834f"/>
+                <rect x="236" y="186" width="9" height="9" fill="#3a2414"/>
+                <rect x="216" y="254" width="10" height="10" fill="#c09060"/>
+              </g>
+
+              <!-- травяные «языки» на стыке -->
+              <g fill="#6cc13c">
+                <polygon points="64,150 74,155 74,166 64,161"/>
+                <polygon points="110,174 120,179 120,190 110,185"/>
+                <polygon points="204,196 214,191 214,202 204,207"/>
+                <polygon points="246,172 256,167 256,178 246,183"/>
+              </g>
+
+              <!-- рёбра -->
+              <g fill="none" stroke="#1d2b12" stroke-opacity=".28" stroke-width="2">
+                <path d="M34 100 160 166 286 100M160 166v134"/>
+              </g>
+              <path d="M34 100 160 34 286 100" fill="none" stroke="#eaffd0" stroke-opacity=".35" stroke-width="2"/>
+            </svg>
+
+            <div class="cube cube--diamond" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <polygon class="f-top" points="40,6 74,24 40,42 6,24"/>
+                <polygon class="f-left" points="6,24 40,42 40,76 6,58"/>
+                <polygon class="f-right" points="40,42 74,24 74,58 40,76"/>
+              </svg>
+            </div>
+
+            <div class="cube cube--violet" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <polygon class="f-top" points="40,6 74,24 40,42 6,24"/>
+                <polygon class="f-left" points="6,24 40,42 40,76 6,58"/>
+                <polygon class="f-right" points="40,42 74,24 74,58 40,76"/>
+              </svg>
+            </div>
+
+            <div class="scene__chip">
+              <span class="scene__pulse"></span>
+              KILLAURA <b>ON</b>
+            </div>
+
+            <div class="scene__sticker">
+              <b>100 ₽</b>
+              <span>навсегда</span>
+            </div>
+
+            <div class="scene__floor"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stats__item">
+          <b>12 486</b>
+          <span>счастливых читеров</span>
+        </div>
+        <div class="stats__item">
+          <b>148</b>
+          <span>модулей в меню</span>
+        </div>
+        <div class="stats__item">
+          <b>0.3<small>мс</small></b>
+          <span>задержка клика</span>
+        </div>
+        <div class="stats__item">
+          <b>100<small>₽</small></b>
+          <span>и это навсегда</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TICKER ================= -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>KILLAURA</span><i>✦</i><span>FLY</span><i>✦</i><span>SCAFFOLD</span><i>✦</i><span>ESP</span><i>✦</i><span>NOFALL</span><i>✦</i><span>TRIGGERBOT</span><i>✦</i><span>X-RAY</span><i>✦</i><span>SPEED</span><i>✦</i><span>JESUS</span><i>✦</i><span>VELOCITY</span><i>✦</i><span>FULLBRIGHT</span><i>✦</i><span>ANTI-AFK</span><i>✦</i>
+        <span>KILLAURA</span><i>✦</i><span>FLY</span><i>✦</i><span>SCAFFOLD</span><i>✦</i><span>ESP</span><i>✦</i><span>NOFALL</span><i>✦</i><span>TRIGGERBOT</span><i>✦</i><span>X-RAY</span><i>✦</i><span>SPEED</span><i>✦</i><span>JESUS</span><i>✦</i><span>VELOCITY</span><i>✦</i><span>FULLBRIGHT</span><i>✦</i><span>ANTI-AFK</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="section" id="features">
+      <div class="section__head reveal">
+        <div class="section__eyebrow"><span>01</span> возможности</div>
+        <h2 class="section__title">Маленький клиент.<br>Большие проблемы<br>у античита.</h2>
+        <p class="section__lead">Мы не стали делать очередной комбайн на 400 мегабайт.
+          Всё, что нужно, уже внутри. Всё, что не нужно, — тоже.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card card--wide reveal">
+          <div class="card__tag">combat</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <h3>KillAura, но с манерами</h3>
+          <p>Бьёт точно в хитбокс и точно по совести. Совесть отключается отдельным модулем — ищи во вкладке Misc.</p>
+          <div class="card__meta"><span>reach 3.42</span><span>cps 12.4</span><span class="ok">on</span></div>
+        </article>
+
+        <article class="card card--narrow reveal">
+          <div class="card__tag">movement</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 4.6c-3.4-.7-7.2-.3-9.8 2.3-1.6 1.6-2.3 3.9-2.1 6.1-.3 2.6.4 5.1 2 6.6"/><path d="M3.2 21c-.6-3.7.4-7.7 3.2-10.4C8.9 8 12 7.4 14.7 8"/></svg>
+          </div>
+          <h3>Fly</h3>
+          <p>Гравитация — опция. Мы её выключили по умолчанию.</p>
+          <div class="card__meta"><span>bind F</span><span class="ok">on</span></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">bypass</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>ByPass 24/7</h3>
+          <p>Обновляем обходы быстрее, чем админ заходит в лог. Если что — мы не при делах.</p>
+          <div class="card__meta"><span class="ok">last sync 2 min ago</span></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">content</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3>148 модулей</h3>
+          <p>От безобидного Fullbright до совсем бессовестного KillAura. Есть даже кнопка «выключить всё» — для слабаков.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">stealth</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.2 12S5.7 5.5 12 5.5c2.2 0 4.1.8 5.6 1.9M21.8 12s-3.5 6.5-9.8 6.5c-2.2 0-4.1-.8-5.6-1.9"/><path d="m3 3 18 18"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+          </div>
+          <h3>Стелс</h3>
+          <p>Не палится в скриншотах, логах и в глазах мамы. Работает тихо, как мышь.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">support</div>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H8l-5 2 1.4-4.2A8 8 0 1 1 21 12Z"/><path d="M9 11h.01M13 11h.01M17 11h.01"/></svg>
+          </div>
+          <h3>Поддержка 24/7</h3>
+          <p>Отвечаем в Discord быстрее, чем античит банит. Обычно. Если не спим.</p>
+          <div class="card__meta"><span class="ok">среднее время ответа 14 сек</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= CLIENT ================= -->
+    <section class="section section--client" id="client">
+      <div class="section__head reveal">
+        <div class="section__eyebrow"><span>02</span> клиент</div>
+        <h2 class="section__title">Выглядит дорого.<br>Стоит 100 ₽.</h2>
+        <p class="section__lead">Тёмная тема, поиск по модулям, бинды и слайдеры.
+          Всё как у взрослых, только за сто рублей. Покликай — оно живое.</p>
+      </div>
+
+      <div class="client reveal" id="clientWindow">
+        <div class="client__bar">
+          <div class="client__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="client__title">PUZOV CLIENT <b>v4.2.0</b></div>
+          <div class="client__stat"><span class="client__live"></span>FPS 240 <i>·</i> PING 12 ms</div>
+        </div>
+
+        <div class="client__body">
+          <aside class="client__side">
+            <div class="client__profile">
+              <canvas class="avatar" width="64" height="64" data-avatar="glasses" aria-hidden="true"></canvas>
+              <div>
+                <b>puzov</b>
+                <span class="client__rank">LIFETIME</span>
+              </div>
+            </div>
+
+            <div class="client__tabs" id="moduleTabs" role="tablist" aria-label="Категории модулей">
+              <button class="client__tab is-active" type="button" role="tab" id="tab-combat" aria-selected="true" aria-controls="moduleList" data-cat="combat">Combat <i>6</i></button>
+              <button class="client__tab" type="button" role="tab" id="tab-movement" aria-selected="false" aria-controls="moduleList" data-cat="movement">Movement <i>6</i></button>
+              <button class="client__tab" type="button" role="tab" id="tab-visuals" aria-selected="false" aria-controls="moduleList" data-cat="visuals">Visuals <i>6</i></button>
+              <button class="client__tab" type="button" role="tab" id="tab-player" aria-selected="false" aria-controls="moduleList" data-cat="player">Player <i>6</i></button>
+              <button class="client__tab" type="button" role="tab" id="tab-misc" aria-selected="false" aria-controls="moduleList" data-cat="misc">Misc <i>6</i></button>
+            </div>
+
+            <div class="client__side-foot">
+              <span>build 4.2.0</span>
+              <span>config: puzov.json</span>
+            </div>
+          </aside>
+
+          <div class="client__main">
+            <div class="client__toolbar">
+              <label class="client__search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input type="search" id="moduleSearch" placeholder="Поиск по модулям…" autocomplete="off" spellcheck="false">
+              </label>
+              <div class="client__active">Активно <b id="activeCount">4</b></div>
+            </div>
+
+            <div class="client__head">
+              <h3 id="categoryTitle">Combat</h3>
+              <span id="categoryHint">6 модулей · кликни по тумблеру</span>
+            </div>
+
+            <div class="client__list" id="moduleList" role="tabpanel" aria-labelledby="tab-combat">
+              <noscript><div class="client__empty">включи JavaScript, чтобы покликать модули</div></noscript>
+            </div>
+
+            <div class="client__foot">
+              <span><i class="dot dot--lime"></i> клиент запущен · 1 204 в сети</span>
+              <div class="client__foot-actions">
+                <button class="client__btn" type="button" data-toast="Настройки сброшены. Как и твои планы на вечер.">RESET</button>
+                <button class="client__btn client__btn--accent" type="button" data-toast="Конфиг puzov.json сохранён. Красиво.">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotkeys reveal">
+        <div class="hotkey"><kbd>RShift</kbd><span>меню клиента</span></div>
+        <div class="hotkey"><kbd>R</kbd><span>KillAura</span></div>
+        <div class="hotkey"><kbd>F</kbd><span>Fly</span></div>
+        <div class="hotkey"><kbd>X</kbd><span>ESP</span></div>
+        <div class="hotkey"><kbd>Ins</kbd><span>self-destruct</span></div>
+        <button class="btn btn--ghost btn--sm hotkeys__download" type="button" data-toast="Лоадер скачивается… шутка. Файла нет, но спасибо, что поверил.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+          Скачать лоадер
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PRICING ================= -->
+    <section class="section section--pricing" id="pricing">
+      <div class="section__head reveal">
+        <div class="section__eyebrow"><span>03</span> тариф</div>
+        <h2 class="section__title">Один платёж.<br>Ноль сожалений.</h2>
+        <p class="section__lead">Никаких 999 ₽ в месяц, «премиум» и «премиум+».
+          Только ты, клиент и 100 рублей. Сдачи не будет.</p>
+      </div>
+
+      <div class="price reveal">
+        <div class="price__glow" aria-hidden="true"></div>
+        <div class="price__left">
+          <div class="price__label">lifetime access</div>
+          <div class="price__value"><span>100</span><i>₽</i></div>
+          <div class="price__old">вместо <s>2 490 ₽</s> · экономия 2 390 ₽</div>
+          <div class="price__badge"><span class="price__badge-dot"></span>оплата один раз, навсегда</div>
+          <button class="btn btn--primary btn--full" type="button" data-open-pay>
+            Купить за 100 ₽
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="price__note">карта · СБП · перевод другу<br>ключ приходит мгновенно, куда — не знаем</p>
+        </div>
+
+        <div class="price__right">
+          <div class="price__right-head">что входит</div>
+          <ul class="price__list">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>148 модулей и все будущие обновления</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>обход античитов, пока они не научатся</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>конфиги в облаке (облако — блокнот на рабочем столе)</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>доступ в Discord и роль «свой»</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>приоритетная поддержка (отвечаем первыми, но не быстрее)</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>ключ не сгорает. совсем. даже если очень попросить</li>
+          </ul>
+          <div class="price__compare">
+            <span>1 шаурма = 250 ₽</span>
+            <b>мы дешевле и вреднее</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REVIEWS ================= -->
+    <section class="section" id="reviews">
+      <div class="section__head reveal">
+        <div class="section__eyebrow"><span>04</span> отзывы</div>
+        <h2 class="section__title">Нам доверяют. Зря.</h2>
+        <div class="rating">
+          <div class="rating__stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+          </div>
+          <p><b>4.9</b> из 5 · 2 148 отзывов · 1 из них настоящий</p>
+        </div>
+      </div>
+
+      <div class="reviews">
+        <article class="review reveal">
+          <div class="review__head">
+            <canvas class="avatar" width="64" height="64" data-avatar="steve" aria-hidden="true"></canvas>
+            <div><b>Kirill_228</b><span>купил сабку · забанен</span></div>
+            <div class="review__stars" aria-label="5 из 5">
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            </div>
+          </div>
+          <p>«Купил сабку за 100 ₽, зашёл на сервер, получил бан через 40 секунд. Написал в поддержку — ответили „так и задумано“. Лучшие сто рублей в жизни».</p>
+          <div class="review__tag">проверенный бан</div>
+        </article>
+
+        <article class="review reveal">
+          <div class="review__head">
+            <canvas class="avatar" width="64" height="64" data-avatar="cap" aria-hidden="true"></canvas>
+            <div><b>_Notch_</b><span>играет с 2011</span></div>
+            <div class="review__stars" aria-label="5 из 5">
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            </div>
+          </div>
+          <p>«Играл без читов и был счастлив. Теперь знаю, что такое Fly. Верните мне сто рублей и смысл жизни».</p>
+          <div class="review__tag">летает</div>
+        </article>
+
+        <article class="review reveal">
+          <div class="review__head">
+            <canvas class="avatar" width="64" height="64" data-avatar="pink" aria-hidden="true"></canvas>
+            <div><b>puzov_fan_2011</b><span>в сети 24/7</span></div>
+            <div class="review__stars" aria-label="5 из 5">
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            </div>
+          </div>
+          <p>«Античит меня не видит. Мама тоже. Я невидимка».</p>
+          <div class="review__tag">stealth 100</div>
+        </article>
+
+        <article class="review reveal">
+          <div class="review__head">
+            <canvas class="avatar" width="64" height="64" data-avatar="steve2" aria-hidden="true"></canvas>
+            <div><b>Admin_Vasya</b><span>админ сервера</span></div>
+            <div class="review__stars" aria-label="4 из 5">
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+              <svg class="is-off" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>
+            </div>
+          </div>
+          <p>«Поставил клиент на сервер, где я админ. Забанил сам себя. 10/10, рекомендую».</p>
+          <div class="review__tag">самобан</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="section section--faq" id="faq">
+      <div class="section__head reveal">
+        <div class="section__eyebrow"><span>05</span> вопросы</div>
+        <h2 class="section__title">Отвечаем честно.<br>Ну, почти.</h2>
+      </div>
+
+      <div class="faq" id="faqList">
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>Это настоящий чит?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>Нет. Это лендинг-шутка, сделанный ради рофла. Никакого софта тут нет, скачивать нечего, банить некого. Но выглядит убедительно, согласись.</p></div></div>
+        </div>
+
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>Почему 100 ₽ и навсегда?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>Потому что «сабка навсегда за сто рублей» — это и есть шутка. В реальности так не продаётся. И продавать читы — нехорошо. Мы просто купили домен.</p></div></div>
+        </div>
+
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>А меня забанят?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>На этом сайте — нет, тут даже регистрации нет. В Minecraft — зависит от сервера. Но мы всё равно не советуем: играй честно, как написано в заголовке.</p></div></div>
+        </div>
+
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>Где скачать лоадер?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>Кнопка «Скачать лоадер» есть. Файла нет. Это тест на доверчивость — ты его, похоже, прошёл. Поздравляем.</p></div></div>
+        </div>
+
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>Кто такой Пузов?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>Легенда. Друг поставил себе в ник <b>puzov-client.ru</b>, а мы взяли и купили домен. Теперь у нас есть сайт. Так и живём.</p></div></div>
+        </div>
+
+        <div class="faq__item reveal">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>Это законно? Вернёте деньги?</span>
+            <i aria-hidden="true"></i>
+          </button>
+          <div class="faq__a"><div><p>Сайт — да, законно. Продажа читов — нет, но мы ничего и не продаём: оплата демонстрационная, ключ ненастоящий, деньги не списываются. Вернуть нечего, но спасибо, что спросил.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="section cta">
+      <div class="cta__inner reveal">
+        <div class="cta__glow" aria-hidden="true"></div>
+        <div class="section__eyebrow section__eyebrow--center"><span>06</span> финал</div>
+        <h2 class="cta__title">Готов стать<br><span class="grad">невидимым?</span></h2>
+        <p class="cta__lead">100 ₽. Один раз. Навсегда. Ну или пока существует сайт — а он существует, пока другу не надоест ник.</p>
+        <div class="cta__actions">
+          <button class="btn btn--primary" type="button" data-open-pay>
+            Забрать за 100 ₽
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+          <button class="btn btn--ghost" type="button" data-toast="Лоадер скачивается… шутка. Файла нет. Но спасибо, что поверил.">
+            Скачать лоадер
+          </button>
+        </div>
+        <p class="cta__note">ключ приходит мгновенно. куда — не знаем.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a class="logo" href="#top" aria-label="Puzov Client — в начало">
+          <svg class="logo__mark" viewBox="0 0 40 44" aria-hidden="true">
+            <polygon points="20,2 37,11 20,20 3,11" fill="#c9ff5a"/>
+            <polygon points="3,11 20,20 20,42 3,33" fill="#78c93c"/>
+            <polygon points="20,20 37,11 37,33 20,42" fill="#9be94a"/>
+          </svg>
+          <span class="logo__text">PUZOV<em>CLIENT</em></span>
+        </a>
+        <p>Чит, которого не было.<br>Сделано на рофле, собрано с любовью.</p>
+        <div class="footer__socials">
+          <button type="button" data-toast="Discord скоро. Как и всё хорошее." aria-label="Discord">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 8.5c2.3-.8 4.7-.8 7 0M7 16c2 1 3.2 1.4 5 1.4s3-.4 5-1.4"/><path d="M7.3 6.5C5.6 9 4.6 12 4.4 16c1.6 1.2 3.2 2 4.8 2.3l.8-1.6M16.7 6.5c1.7 2.5 2.7 5.5 2.9 9.5-1.6 1.2-3.2 2-4.8 2.3l-.8-1.6"/></svg>
+          </button>
+          <button type="button" data-toast="Telegram скоро. Честно-честно." aria-label="Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 4-3 16-6-4-3 3v-5l9-7-11 6-4-2 18-7Z"/></svg>
+          </button>
+          <button type="button" data-toast="YouTube скоро. Там будут нарезки, где мы летаем." aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="m11 9 4 3-4 3V9Z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <h4>навигация</h4>
+          <a href="#features">Возможности</a>
+          <a href="#client">Клиент</a>
+          <a href="#pricing">Тариф</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>документы</h4>
+          <button type="button" data-toast="Правила: не будь токсичным. Всё.">Правила</button>
+          <button type="button" data-toast="Оферта: 100 ₽ навсегда. Это всё, что нужно знать.">Оферта</button>
+          <button type="button" data-toast="Политика конфиденциальности: мы ничего не собираем. Даже это.">Приватность</button>
+          <button type="button" data-toast="Возвраты: их нет. Но ты и не платил.">Возвраты</button>
+        </div>
+        <div>
+          <h4>контакты</h4>
+          <a href="mailto:hi@puzov-client.ru">hi@puzov-client.ru</a>
+          <button type="button" data-toast="Поддержка отвечает быстрее античита. Обычно.">Поддержка</button>
+          <span class="footer__status"><i></i>все модули онлайн</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__quote">
+      «Однажды друг добавил в ник puzov-client.ru. Мы купили домен. Теперь это сайт».
+      <span>— отдел маркетинга</span>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 Puzov Client. Сайт-шутка. Мы не продаём читы, не призываем их использовать и никак не связаны с Mojang Studios. Все цены, отзывы и баны выдуманы, домен куплен ради смеха.</p>
+      <p class="footer__made">made with <span>♥</span> and 100 ₽</p>
+    </div>
+  </footer>
+
+  <!-- ================= PAY MODAL ================= -->
+  <dialog class="modal" id="payDialog" aria-label="Оплата Puzov Client Lifetime">
+    <div class="modal__inner">
+      <button class="modal__close" type="button" data-close-pay aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+
+      <div class="modal__step" data-step="pay">
+        <div class="modal__eyebrow">оплата</div>
+        <h3 class="modal__title" id="payTitle">Puzov Client <b>Lifetime</b></h3>
+        <div class="modal__price">100 <span>₽</span> <s>2 490 ₽</s></div>
+
+        <div class="pay-methods" role="group" aria-label="Способ оплаты">
+          <button class="pay-method is-active" type="button">СБП</button>
+          <button class="pay-method" type="button">Карта</button>
+          <button class="pay-method" type="button">Перевод другу</button>
+        </div>
+
+        <button class="btn btn--primary btn--full" type="button" id="payBtn">
+          <span>Оплатить 100 ₽</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="modal__note">Демо-оплата. Деньги не списываются — их и так нет.</p>
+      </div>
+
+      <div class="modal__step" data-step="done" hidden>
+        <div class="modal__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m4 12.5 5 5L20 6.5"/></svg>
+        </div>
+        <h3 class="modal__title">Оплачено. <span class="grad">Почти.</span></h3>
+        <p class="modal__done-text">Ключ сгенерирован, совесть очищена. Скопируй и никому не показывай.</p>
+        <div class="key">
+          <code id="licenseKey">PUZOV-100RUB-NAVSEGDA</code>
+          <button class="key__copy" type="button" data-copy-key aria-label="Скопировать ключ">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+          </button>
+        </div>
+        <button class="btn btn--primary btn--full" type="button" data-close-pay>Забрать ключ</button>
+        <p class="modal__note">Это шутка: ничего не списано, ключ ненастоящий, лоадера не существует.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
 </html>

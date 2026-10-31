@@ -1,0 +1,8 @@
+# системный мусор
+.DS_Store
+Thumbs.db
+
+# локальные инструменты и зависимости
+node_modules/
+.tools/
+npm-debug.log*
