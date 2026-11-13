@@ -1,4 +1,4 @@
-# Hi there, I'm [Your Name] 👋
+# Hi there, I'm minecrrrr 👋
 
 ## About Me
 - I'm a yandere enthusiast-developer
