@@ -3,7 +3,7 @@
 ## About Me
 - I'm a yandere enthusiast-developer
 - I'm currently learning **Kotlin (Jetpack Compose, Minecraft Modding)**
-- I'm looking for BDSM with cute femboy
+- I'm looking for BDSM with cute femboy & sex with bread -> 🍞 
 - Fun fact: I love larp Tomoko Kuroki
 
 ## Tech Stack
