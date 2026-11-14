@@ -13,6 +13,7 @@
 
 ## GitHub Stats
 ![Your GitHub Stats](https://github-stats-extended.vercel.app/api?username=minecrrrr&show_icons=true&theme=radical)
+
 ![Top Languages](https://github-stats-extended.vercel.app/api/top-langs/?username=minecrrrr&layout=compact&theme=radical)
 
 ## Connect With Me
